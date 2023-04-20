@@ -4174,8 +4174,19 @@ function initDraggableContainer(containerRef, containerProps, limitProps, dragga
       // 判断点击的元素是否处于画板中，true才取消此激活--start
       Object(external_commonjs_vue_commonjs2_vue_root_Vue_["nextTick"])(function () {
         var broadbodyEle = document.querySelector(".broadbody");
+        var mouseflag = 0; // 鼠标右键按下
 
-        if (broadbodyEle && !e.ctrlKey) {
+        if (e instanceof MouseEvent && e.button === 2) {
+          mouseflag = 2;
+        } // 双指触摸屏幕
+
+
+        if (e instanceof TouchEvent && e.touches.length === 2) {
+          mouseflag = 2;
+        } // 只有在没有按住ctrl键，鼠标点击是左键，以及在画板中，才会取消当前激活状态
+
+
+        if (broadbodyEle && !e.ctrlKey && mouseflag === 0) {
           // console.log("KKKKKK3===", broadbodyEle.contains(<Node>target))
           if (broadbodyEle.contains(target)) {
             setEnable(false);
