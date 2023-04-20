@@ -279,14 +279,14 @@ export function initDraggableContainer(
           mouseflag = 2
         }
 
-        console.log("KKKKKK1===", e)
-        console.log("KKKKKK2===", broadbodyEle)
-        console.log("KKKKKK3===", e.ctrlKey)
-        console.log("KKKKKK4===", mouseflag)
+        // console.log("KKKKKK1===", e)
+        // console.log("KKKKKK2===", broadbodyEle)
+        // console.log("KKKKKK3===", e.ctrlKey)
+        // console.log("KKKKKK4===", mouseflag)
 
         // 只有在没有按住ctrl键，鼠标点击是左键，以及在画板中，才会取消当前激活状态
         if(broadbodyEle && !e.ctrlKey && mouseflag == 0){
-          console.log("KKKKKK5===", broadbodyEle.contains(<Node>target))
+          // console.log("KKKKKK5===", broadbodyEle.contains(<Node>target))
           if(broadbodyEle.contains(<Node>target)){
             setEnable(false)
           }
