@@ -1,5 +1,6 @@
 import { Ref } from 'vue';
 import { ContainerProvider, ResizingHandle } from './types';
+declare type HandleEvent = MouseEvent | TouchEvent;
 export declare function useState<T>(initialState: T): [Ref<T>, (value: T) => T];
 export declare function initState(props: any, emit: any): {
     id: string;
@@ -24,10 +25,10 @@ export declare function initState(props: any, emit: any): {
     setResizingMaxWidth: (value: number) => number;
     setResizingMinWidth: (value: number) => number;
     setResizingMinHeight: (value: number) => number;
-    $setWidth: (val: number) => number;
-    $setHeight: (val: number) => number;
-    $setTop: (val: number) => number;
-    $setLeft: (val: number) => number;
+    setWidth: (val: number) => number;
+    setHeight: (val: number) => number;
+    setTop: (val: number) => number;
+    setLeft: (val: number) => number;
 };
 export declare function initParent(containerRef: Ref<HTMLElement | undefined>): {
     parentWidth: Ref<number>;
@@ -52,6 +53,7 @@ export declare function initDraggableContainer(containerRef: Ref<HTMLElement | u
 };
 export declare function initResizeHandle(containerProps: ReturnType<typeof initState>, limitProps: ReturnType<typeof initLimitSizeAndMethods>, parentSize: ReturnType<typeof initParent>, props: any, emit: any): {
     handlesFiltered: import("vue").ComputedRef<ResizingHandle[]>;
-    resizeHandleDown: (e: MouseEvent, handleType: ResizingHandle) => void;
+    resizeHandleDown: (e: HandleEvent, handleType: ResizingHandle) => void;
 };
 export declare function watchProps(props: any, limits: ReturnType<typeof initLimitSizeAndMethods>): void;
+export {};
