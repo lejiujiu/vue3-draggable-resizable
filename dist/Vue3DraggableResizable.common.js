@@ -4164,7 +4164,8 @@ function initDraggableContainer(containerRef, containerProps, limitProps, dragga
     if (!((_containerRef$value = containerRef.value) === null || _containerRef$value === void 0 ? void 0 : _containerRef$value.contains(target))) {
       // 判断点击的元素是否处于画板中，true才取消此激活--start
       Object(external_commonjs_vue_commonjs2_vue_root_Vue_["nextTick"])(function () {
-        var broadbodyEle = document.querySelector(".broadbody");
+        var broadbodyEle = document.querySelector(".broadbody"); // let broadbodyEle: Element | null = document.querySelector(".parent")
+
         var mouseflag = 0; // 鼠标右键按下
 
         if (e instanceof MouseEvent && e.button === 2) {
@@ -4174,11 +4175,16 @@ function initDraggableContainer(containerRef, containerProps, limitProps, dragga
 
         if (e instanceof TouchEvent && e.touches.length === 2) {
           mouseflag = 2;
-        } // 只有在没有按住ctrl键，鼠标点击是左键，以及在画板中，才会取消当前激活状态
+        }
 
+        console.log("KKKKKK1===", e);
+        console.log("KKKKKK2===", broadbodyEle);
+        console.log("KKKKKK3===", e.ctrlKey);
+        console.log("KKKKKK4===", mouseflag); // 只有在没有按住ctrl键，鼠标点击是左键，以及在画板中，才会取消当前激活状态
 
-        if (broadbodyEle && !e.ctrlKey && mouseflag === 0) {
-          // console.log("KKKKKK3===", broadbodyEle.contains(<Node>target))
+        if (broadbodyEle && !e.ctrlKey && mouseflag == 0) {
+          console.log("KKKKKK5===", broadbodyEle.contains(target));
+
           if (broadbodyEle.contains(target)) {
             setEnable(false);
           }
