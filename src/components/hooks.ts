@@ -1,4 +1,4 @@
-import { onMounted, onUnmounted, ref, watch, Ref, computed } from 'vue'
+import { onMounted, onUnmounted, ref, watch, Ref, computed, nextTick } from 'vue'
 import {
   getElSize,
   filterHandles,
@@ -258,9 +258,24 @@ export function initDraggableContainer(
   let referenceLineMap: ReferenceLineMap | null = null
   const documentElement = document.documentElement
   const _unselect = (e: HandleEvent) => {
+    // console.log("KKKKKK===", e)
+
     const target = e.target
     if (!containerRef.value?.contains(<Node>target)) {
-      setEnable(false)
+
+      // 判断点击的元素是否处于画板中，true才取消此激活--start
+      nextTick(()=>{
+        let broadbodyEle: Element | null = document.querySelector(".broadbody")
+        if(broadbodyEle && !e.ctrlKey){
+          // console.log("KKKKKK3===", broadbodyEle.contains(<Node>target))
+          if(broadbodyEle.contains(<Node>target)){
+            setEnable(false)
+          }
+        }
+      })
+      // 判断点击的元素是否处于画板中，true才取消此激活--end
+
+      // setEnable(false)
       setDragging(false)
       setResizing(false)
       setResizingHandle('')
